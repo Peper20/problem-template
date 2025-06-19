@@ -63,7 +63,7 @@ class RunResult(NamedTuple):
 
 
     def __str__(self):
-        return f'{self.verdict} [grey0]/ {float(self.time):.3f}s[/grey0]' if self.time is not None else f'{self.verdict}'
+        return f'{self.verdict} / {float(self.time):.3f}s' if self.time is not None else f'{self.verdict}'
 
 
 class Invocation:

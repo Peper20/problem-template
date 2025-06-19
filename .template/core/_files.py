@@ -9,7 +9,7 @@ ROOT_SOLS_DIR: Path = Path('sols')
 ROOT_TESTS_DIR: Path = Path('tests')
 
 
-# SolutionName = Annotated[str, 'Solution file name without path, e. g. sol1.py']
+SolutionName = Annotated[str, 'Solution file name without path, e. g. sol1.py']
 TestName = Annotated[str, 'Test file name without path, e. g. 12_02.txt']
 
 

@@ -70,12 +70,6 @@ class CreateMultytests:
     
 
     def _save(self, tests: list[Multytest], test_group: int):
-        for test_number, test in enumerate(tests):
-            with open(ROOT_TESTS_DIR / Path(f'{test_group:02}_{test_number:02}.txt'), 'w') as f:
-                test.save(f)
-
-
-    def save(self, test_group: int, limit: int = 10, cycle: bool = False) -> Callable:
         old_tests: list[Path] = []
         for test_name in get_tests_names():
             if get_group_and_number(test_name)[0] == test_group:
@@ -90,7 +84,12 @@ class CreateMultytests:
         else:
             print(f'gen:test group {test_group}: old tests has not detected')
 
+        for test_number, test in enumerate(tests):
+            with open(ROOT_TESTS_DIR / Path(f'{test_group:02}_{test_number:02}.txt'), 'w') as f:
+                test.save(f)
 
+
+    def save(self, test_group: int, limit: int = 10, cycle: bool = False) -> Callable:
         tests: list[Multytest] = [self.multytest_cls()]
         def dec(gen: Callable[[], Generator[Any]]) -> Callable[[], Generator[Any]]:
             start_time: float = perf_counter()

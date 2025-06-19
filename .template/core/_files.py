@@ -13,8 +13,9 @@ SolutionName = Annotated[str, 'Solution file name without path, e. g. sol1.py']
 TestName = Annotated[str, 'Test file name without path, e. g. 12_02.txt']
 
 
-def get_tests_names() -> Generator[TestName]:
-    yield from listdir(ROOT_TESTS_DIR)
+def get_tests_names() -> list[TestName]:
+    ROOT_TESTS_DIR.mkdir(parents=True, exist_ok=True)
+    return listdir(ROOT_TESTS_DIR)
 
 
 def get_group_and_number(test_name: TestName) -> tuple[int, int]:

@@ -62,6 +62,7 @@ class CreateTests:
 
 
     def save(self, test_group: int, limit: int = 10, cycle: bool = False) -> Callable:
+        ROOT_TESTS_DIR.mkdir(parents=True, exist_ok=True)
         tests: list[Test] = []
         def dec(gen: Callable[[], Generator[Any]]) -> Callable[[], Generator[Any]]:
             start_time: float = perf_counter()

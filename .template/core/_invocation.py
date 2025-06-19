@@ -100,8 +100,8 @@ class Invocation:
                 check=False,
             )
         except subprocess.TimeoutExpired as e:
-            # print(e.timeout, timeout, DELTA, timeout + DELTA, perf_counter() - start_time)
-            return RunResult(Verdict.TL, e.timeout)
+            elapsed_time = perf_counter() # e.timeout can be incorrect
+            return RunResult(Verdict.TL, max(e.timeout, elapsed_time - start_time))
         
         finally:
             test_stdin.close()
@@ -151,8 +151,8 @@ class Invocation:
 
         tests = list(get_tests_names())
         with (
-            ThreadPoolExecutor(max_workers=4) as main_executor,
-            ThreadPoolExecutor(max_workers=6) as sub_executor,
+            ThreadPoolExecutor(max_workers=6) as main_executor,
+            ThreadPoolExecutor(max_workers=12) as sub_executor,
             Progress(console=console) as progress,
         ):
             progress_bar = progress.add_task('[cyan]Running...', total=len(tests))

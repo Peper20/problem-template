@@ -4,7 +4,6 @@ from time import perf_counter
 from pathlib import Path
 
 
-
 from ._files import get_group_and_number, get_tests_names, ROOT_TESTS_DIR
 from .utils import infinity_gen
 from .tests_abc import Test as TestCase

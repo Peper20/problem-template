@@ -123,7 +123,6 @@ class Invocation:
         return RunResult(Verdict.OK, time)
 
 
-
     def _run_test(self, test_name: TestName, timeout: Time, executor: ThreadPoolExecutor) -> tuple[RunResult]:
         model_result = self._run_solution_on_test(self.model_solution, test_name, timeout)
         

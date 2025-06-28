@@ -40,4 +40,4 @@ with (
 
 end_time = perf_counter()
 
-print(f'to_zip:created "{archive_name}" in {end_time - start_time:.3f}s')
+console.print(f'to_zip:created "{archive_name}" in [not bold][cyan]{end_time - start_time:.3f}s[/not bold]')

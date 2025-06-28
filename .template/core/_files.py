@@ -1,4 +1,4 @@
-from typing import Annotated, Generator
+from typing import Annotated
 from pathlib import Path
 from os import listdir
 

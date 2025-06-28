@@ -11,9 +11,6 @@ from core.tests_abc import (
 
 
 class _Limit(NamedTuple):
-    min_t:   int = 1
-    max_t:   int = 4 * 10 ** 4
-
     min_a:   int = 1
     max_a:   int = 10 ** 9
 

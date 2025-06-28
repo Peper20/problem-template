@@ -166,6 +166,7 @@ class Invocation:
 
                 progress.update(progress_bar, advance=1)
             
-            progress.remove_task(progress_bar)
+            # progress.remove_task(progress_bar)
+        console.print()
         console.print(table)
 

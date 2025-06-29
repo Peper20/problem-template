@@ -18,10 +18,6 @@ from tests import ct, limit
 
 
 
-seed('.template'); print('WARNING: change random seed')
-
-
-
 # @ct.save(0)
 def gen(): # should be manual test
     pass

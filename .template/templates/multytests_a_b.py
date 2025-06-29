@@ -88,7 +88,7 @@ class Multytest(_Multytest[TestCase]):
         self.sum_b += test_case.b
 
 
-print('WARNING: change limits and test classes')
+print('WARNING: change limits, test classes and random seed base')
 
 
-ct = CreateMultytests(Multytest, TestCase)
+ct = CreateMultytests(Multytest, TestCase, random_seed_base='.template')

@@ -63,7 +63,7 @@ class Test(_Test):
         print(*self.a, file=file)
 
 
-print('WARNING: change limits and test classes')
+print('WARNING: change limits, test classes and random seed base')
 
 
-ct = CreateTests(Test)
+ct = CreateTests(Test, random_seed_base='.template')

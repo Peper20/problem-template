@@ -58,7 +58,7 @@ class TestCase(_Test):
 
 
 
-print('WARNING: change limits and test classes')
+print('WARNING: change limits, test classes and random seed base')
 
 
-ct = CreateTests(TestCase)
+ct = CreateTests(TestCase, random_seed_base='.template')

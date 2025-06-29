@@ -4,8 +4,8 @@ from time import perf_counter
 from pathlib import Path
 
 
-from .utils import infinity_gen
 from ._files import get_group_and_number, get_tests_names, ROOT_TESTS_DIR
+from .utils import infinity_gen, safe_seed_change
 
 
 
@@ -34,10 +34,12 @@ class Test(ABC):
 
 class CreateTests:
     test_cls: Type[Test] = None
+    random_seed_base: str = None
 
 
-    def __init__(self, test_cls: Type[Test]) -> None:
+    def __init__(self, test_cls: Type[Test], random_seed_base: str) -> None:
         self.test_cls = test_cls
+        self.random_seed_base = random_seed_base
     
 
     def _save(self, tests: list[Test], test_group: int):
@@ -62,8 +64,9 @@ class CreateTests:
 
 
     def save(self, test_group: int, limit: int = 10, cycle: bool = False) -> Callable:
-        ROOT_TESTS_DIR.mkdir(parents=True, exist_ok=True)
         tests: list[Test] = []
+
+        @safe_seed_change(self.random_seed_base + str(test_group))
         def dec(gen: Callable[[], Generator[Any]]) -> Callable[[], Generator[Any]]:
             start_time: float = perf_counter()
 

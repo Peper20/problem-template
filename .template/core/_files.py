@@ -8,13 +8,15 @@ from os import listdir
 ROOT_SOLS_DIR: Path = Path('sols')
 ROOT_TESTS_DIR: Path = Path('tests')
 
+ROOT_TESTS_DIR.mkdir(parents=True, exist_ok=True)
+ROOT_TESTS_DIR.mkdir(parents=True, exist_ok=True)
+
 
 SolutionName = Annotated[str, 'Solution file name without path, e. g. sol1.py']
 TestName = Annotated[str, 'Test file name without path, e. g. 12_02.txt']
 
 
 def get_tests_names() -> list[TestName]:
-    ROOT_TESTS_DIR.mkdir(parents=True, exist_ok=True)
     return listdir(ROOT_TESTS_DIR)
 
 

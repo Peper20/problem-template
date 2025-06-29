@@ -5,7 +5,7 @@ from pathlib import Path
 
 
 from ._files import get_group_and_number, get_tests_names, ROOT_TESTS_DIR
-from .utils import infinity_gen
+from .utils import infinity_gen, safe_seed_change
 from .tests_abc import Test as TestCase
 
 
@@ -61,11 +61,13 @@ class Multytest[TC: TestCase](ABC):
 class CreateMultytests:
     multytest_cls: Type[Multytest] = None
     test_case_cls: Type[TestCase] = None
+    random_seed_base: str = None
 
 
-    def __init__(self, multytest_cls: Type[Multytest], test_case_cls: Type[TestCase]) -> None:
+    def __init__(self, multytest_cls: Type[Multytest], test_case_cls: Type[TestCase], random_seed_base: str) -> None:
         self.multytest_cls = multytest_cls
         self.test_case_cls = test_case_cls
+        self.random_seed_base = random_seed_base
     
 
     def _save(self, tests: list[Multytest], test_group: int):
@@ -89,8 +91,9 @@ class CreateMultytests:
 
 
     def save(self, test_group: int, limit: int = 10, cycle: bool = False) -> Callable:
-        ROOT_TESTS_DIR.mkdir(parents=True, exist_ok=True)
         tests: list[Multytest] = [self.multytest_cls()]
+
+        @safe_seed_change(self.random_seed_base + str(test_group))
         def dec(gen: Callable[[], Generator[Any]]) -> Callable[[], Generator[Any]]:
             start_time: float = perf_counter()
 
